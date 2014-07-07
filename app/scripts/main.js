@@ -1,0 +1,1 @@
+'use strict';/*global IdNews */$(function() {    new IdNews('#news', 'DqsF_ZG72xGLbes9l7okhQ');    //new IdNews($('.id-news'), 'PLKC7o943BGDA5mW2R2EvQ');    //new IdNews($('.id-news'), 'IHKrjCRM3BGzXP98yjUFzw');});

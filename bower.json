@@ -1,0 +1,10 @@
+{
+  "name": "ypipe",
+  "private": true,
+  "dependencies": {
+    "jquery": "~1.11.0",
+    "moment": "~2.7.0",
+    "sr-pagination": "*"
+  },
+  "devDependencies": {}
+}

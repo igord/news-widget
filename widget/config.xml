@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<widget xmlns="http://www.w3.org/ns/widgets" 
+    id="http://www.github.com/igord/news-widget" 
+    version="0.1.0"
+    defaultlocale="en-us">
+  <!-- Name of the widget -->
+  <name short="News" xml:lang="en-us">News from Yahoo Pipe</name>
+  <!-- Description is shown when installing widget -->
+  <description xml:lang="en-us">Displays Yahoo Pipe RSS news feed</description>
+  <!-- Start page for widget -->
+  <content src="index.html" />
+  <!-- Widget author -->
+  <author>Igor Dimitrijevic</author>
+</widget>
