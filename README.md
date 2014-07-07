@@ -6,7 +6,7 @@ Yahoo Pipes news widget
 Demo: http://igord.github.io/news-widget/
 
 Usage
---------------
+---
 ```js
 new IdNews(selector:String, id:String, config:Object);
 ```
