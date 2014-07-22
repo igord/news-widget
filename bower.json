@@ -6,5 +6,6 @@
     "moment": "~2.7.0",
     "sr-pagination": "*"
   },
-  "devDependencies": {}
+  "devDependencies": {
+  }
 }

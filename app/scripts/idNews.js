@@ -1,5 +1,8 @@
 'use strict';
 /*global moment, sdata, pagination */
+/*
+ * TODO: write tests, update times every minute
+ */
 
 function IdNews(sel, id, cnf) {
     // merge config with default values
@@ -38,9 +41,7 @@ function IdNews(sel, id, cnf) {
     this.$c = $(sel).addClass(this.cnf.prefix + 'news');
     this.$c.append('<div class="' + this.cnf.prefix + 'title">' + this.cnf.loadText + '</div>');
 
-    this.$c.width(this.cnf.width).height(this.cnf.height);
-    //this.onLoad(sdata);
-    this.load(id);
+    if (id) this.load(id);
 }
 
 $.extend(IdNews.prototype, {
@@ -72,7 +73,7 @@ $.extend(IdNews.prototype, {
 
 	// extract needed data from the feed and fix dates and descriptions
 	this.parse(data);
-	this.$title.text(this.cnf.title || this.data.title);
+	this.$title.text(this.cnf.title || this.data.title || 'No data.');
 	this.$title.click($.proxy(this.showPage, this)).click();
     },
     showPage: function(n) {
@@ -83,7 +84,7 @@ $.extend(IdNews.prototype, {
 	    until = from + this.cnf.limit;
 
 	for (i = from; i < until; i++) {
-	    d = this.data.items[i];
+	    d = this.data.items? this.data.items[i] : false;
 	    if (!d) break;
 	    $c = this.$li.clone();
 	    this.renderItem($c, d);
@@ -106,6 +107,11 @@ $.extend(IdNews.prototype, {
 		rows: this.cnf.limit,
 		total: this.data.items.length
 	    }),
+	    handler = function($t) {
+		return function() {
+		    t.showPage($t.data('index'));
+		};
+	    },
 	    i, $b;
 
 	for (i = 0; i < p.length; i++) {
@@ -118,9 +124,7 @@ $.extend(IdNews.prototype, {
 	    $b.data('index', p[i].index - 1);
 
 	    if (!p[i].active) {
-		$b.click(function() {
-		    t.showPage($(this).data('index'));
-		});
+		$b.click(handler($b));
 	    } else {
 		$b.css('font-weight', 'bold');
 	    }
@@ -171,10 +175,11 @@ $.extend(IdNews.prototype, {
     },
     // parse dates from RSS feeds to normalize data
     parse: function(d) {
-	this.data = {
-	    title: d.value.title,
-	    items: []
-	};
+	this.data = {title: 'No data.', items: []};
+	if (!d.value) {
+	    return;
+	}
+	this.data.title = d.value.title || this.cnf.title;
 	var i = d.value.items.length,
 	    v, m, item, media;
 	while (i--) {

@@ -2,6 +2,7 @@
   "name": "ypipe",
   "version": "0.0.0",
   "description": "Yahoo Pipe News Widget",
+  "repository": "https://github.com/igord/news-widget.git",
   "dependencies": {
   },
   "devDependencies": {
